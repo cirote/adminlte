@@ -1,6 +1,6 @@
 {
-    "name": "stic_sat/regimenes",
-    "description": "Regimenes especiales de importación",
+    "name": "mercosur/regimenes",
+    "description": "Estadisticas sobre Regimenes especiales de importación",
     "type": "library",
     "license": "Only for use in the Mercosur Secreatariat",
     "authors": [
@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Regimenes\\": "src/"
+            "Mercosur\\Regimenes\\": "src/"
         }
     },
     "require": {
@@ -19,5 +19,15 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^8.3"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mercosur\\Regimenes\\ServiceProvider\\RegimenesServiceProvider"
+            ],
+            "aliases": {
+                "Ordenado": "Mercosur\\Regimenes\\Facades\\Regimenes"
+            }
+        }
     }
 }
