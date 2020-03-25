@@ -4,7 +4,7 @@ namespace Mercosur\Regimenes\ServiceProvider;
 
 use Illuminate\Support\ServiceProvider;
 
-class OrdenadoServiceProvider extends ServiceProvider
+class RegimenesServiceProvider extends ServiceProvider
 {
 	public function register()
 	{
@@ -16,7 +16,7 @@ class OrdenadoServiceProvider extends ServiceProvider
 //
 //		$this->register_migrations();
 
-//		$this->register_routes();
+		$this->register_routes();
 
 //		$this->register_views();
 	}
