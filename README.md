@@ -27,6 +27,6 @@ $ php artisan populate:regimenes
 
 - [Esteban Rogel][link-author]
 - [All Contributors][link-contributors]
-- 
+
 [link-author]: https://github.com/mercosur
 [link-contributors]: ../../contributors]
