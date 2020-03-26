@@ -1,6 +1,6 @@
 <?php
 
-namespace Mercosur\Ordenado\Facades;
+namespace Mercosur\Regimenes\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

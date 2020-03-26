@@ -1,35 +1,25 @@
-@extends('ordenado::layout')
+@extends('layouts.project')
 
-@section('content_header_title', $texto->titulo)
-@section('content_header_description', $texto->naturaleza)
+@section('htmlheader_title', 'Regímenes Especiales de Importacion del MERCOSUR - Texto ordenado y comentado')
 
-@section('main-content')
-<div class="row">
-
-	<div class="col-sm-1"></div>
-	<div class="col-sm-10">
-
-		<div class="row">
-			<div class="col-sm-12">
-				@if(View::exists("ordenado::{$texto->referencia}.disclaimer"))
-					@include("ordenado::{$texto->referencia}.disclaimer")
-				@endif
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-sm-12">
-				@foreach($texto->capitulos as $capitulo)
-
-{{--			@php($abierto = $loop->first ? true : false)--}}
-				@php($abierto = false)
-
-				@include("ordenado::$alternativa.capitulos")
-				@endforeach
-			</div>
-		</div>
-
-	</div>
-</div>
+@section('styles')
+    @parent
 @endsection
 
+@section('content_header')
+    {{-- BECAUSE THIS PAGE POINTS TO AN IFRAME, WE CLEAN THIS SECTION AND PUT STATIC DATA --}}
+    <section class="content-header">
+        <h1>
+            Regímenes Especiales de Importacion del MERCOSUR
+            <small>Texto ordenado y comentado</small>
+        </h1>
+    </section>
+@endsection
+
+@section('main-content')
+    <iframe src="{{ env('SAREM_URL', 'https://sarem.mercosur.int') }}/texto/rei?le={{ App::getLocale() }}&amp;sesion={{ session()->getId() }}" style="background-color: #FFFFFF; width: 100%; height: 52vw;" frameborder="0"></iframe>
+@endsection
+
+@section('scripts')
+    @parent
+@endsection

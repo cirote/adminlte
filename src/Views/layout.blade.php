@@ -11,12 +11,11 @@
 
 @section('main_header')
 	<header class="main-header">
-		<nav class="navbar navbar-static-top" role="navigation">
-		</nav>
+		<nav class="navbar navbar-static-top" role="navigation"></nav>
 	</header>
 @endsection
 
-@section('content_header_description', __('ordenado::ordenado.to'))
+@section('content_header_description', __('regimenes::regimenes.rei'))
 
 @section('sidebar')
 {{--	@include('layouts.partials.menus.sidebar_menu')--}}
