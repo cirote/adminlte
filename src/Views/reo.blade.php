@@ -1,4 +1,4 @@
-@extends('layouts.final')
+@extends('regimenes::layout')
 
 @section('main-content')
     <div class="row">
