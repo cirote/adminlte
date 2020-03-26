@@ -4,10 +4,18 @@ Proyecto para la creacion de una base de datos con la informacion proporcionada 
 
 ### Instalacion
 
-composer require mercosur/regimenes
+Instalar el paquete utilizando [Composer](http://getcomposer.org/). 
 
-php artisan migrate
+Escriba el siguiente comando en la terminal:
+
+    composer require mercosur/regimenes
+
+Realice las migraciones
+
+    php artisan migrate
 
 ### Agregar datos a la base
 
-php artisan populate:regimenes
+Cargar los datos sobre los regimenes especiales disponibles
+
+    php artisan populate:regimenes
