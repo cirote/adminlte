@@ -11,9 +11,14 @@ class CreateListasRegimenesTable extends Migration
     {
         Schema::create(Regimenes::PREFIJO . Regimenes::LISTAS, function (Blueprint $table) {
             $table->increments('id');
-	        $table->string('codigo');
-            $table->float('arancel');
-            $table->string('observaciones');
+            $table->integer('notificacion_id')->unsigned()->index()->refers()->on(Regimenes::PREFIJO . Regimenes::NOTIFICACIONES);
+            $table->integer('regimen_id')->unsigned()->index()->refers()->on(Regimenes::PREFIJO . Regimenes::REGIMENES);
+            $table->string('tipo');
+            $table->integer('anio');
+            $table->integer('semestre')->nullable()->default(null);
+            $table->integer('trimestre')->nullable()->default(null);
+	        $table->string('archivo');
+            $table->string('hoja');
 	        $table->timestamps();
         });
     }

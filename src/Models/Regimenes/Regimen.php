@@ -20,4 +20,9 @@ class Regimen extends Model
 	{
 		return static::where('abreviatura', $abreviatura)->first();
 	}
+
+	public function listas()
+	{
+		return $this->hasMany(Lista::class, 'regimen_id');
+	}
 }

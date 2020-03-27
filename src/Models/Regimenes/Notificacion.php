@@ -6,16 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 use Mercosur\Regimenes\Config\Regimenes;
 
-class Notificaciones extends Model
+class Notificacion extends Model
 {
 	use HasTranslations;
 
-	protected $table = Regimenes::PREFIJO . Regimenes::REGIMENES;
+	protected $table = Regimenes::PREFIJO . Regimenes::NOTIFICACIONES;
 
-	public $translatable = ['nombre'];
+	public $translatable = ['asunto'];
 
-	public static function byAbreviatura($abreviatura)
+	protected $guarded = [];
+
+	protected $dates = ['fecha', 'created_at', 'updated_at'];
+
+	public function listas()
 	{
-		return static::where('abreviatura', $abreviatura)->first();
+		return $this->hasMany(Lista::class, 'notificacion_id');
 	}
 }

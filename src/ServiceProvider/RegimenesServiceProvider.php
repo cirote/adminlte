@@ -3,6 +3,7 @@
 namespace Mercosur\Regimenes\ServiceProvider;
 
 use Illuminate\Support\ServiceProvider;
+use Mercosur\Regimenes\Commands\Datos;
 use Mercosur\Regimenes\Commands\Regimenes;
 
 class RegimenesServiceProvider extends ServiceProvider
@@ -30,6 +31,7 @@ class RegimenesServiceProvider extends ServiceProvider
 		if ($this->app->runningInConsole()) {
 			$this->commands([
 				Regimenes::class,
+				Datos::class,
 			]);
 		}
 	}

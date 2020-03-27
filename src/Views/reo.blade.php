@@ -55,18 +55,37 @@
                                         <th style="width: 18%; text-align: center">Uruguay</th>
                                         <th style="width: 18%; text-align: center">Venezuela</th>
                                     </tr>
+                                    @foreach($regimen->listas()->composicion()->periodos()->get() as $periodo)
+
+                                    @php(
+                                        $e = $regimen->listas->filter
+                                        (
+                                            function ($lista) use ($periodo)
+                                            {  
+                                                return $lista->notificacion->informante == 'ARG' && $lista->anio == $periodo->anio && $lista->semestre == $periodo->semestre; 
+                                            }
+                                        )
+                                        ->first()
+                                    )
+
+
                                     <tr>
-                                        <td style="text-align: center">2º Semestre 2019</td>
-                                        <td style="text-align: center">
-                                            <a href="/rei/items" class="product-title">Nota DIMEC's 366/2019 del 31/07/2019</a> &nbsp;
-                                            <a href="/rei/nota" class="product-title"><i class="fa fa-clone"></i></a> &nbsp;
-                                            <a href="/rei/tabla" class="product-title"><i class="fa fa-table"></i></a>
-                                        </td>
+                                        <td style="text-align: center">{{ $periodo->semestre }}º Semestre {{ $periodo->anio }}</td>
+                                        @if($e)
+                                            <td style="text-align: center">
+                                                <a href="/rei/items" class="product-title">Nota {{ $e->notificacion->nota }} del 31/07/2019</a> &nbsp;
+                                                <a href="/rei/nota" class="product-title"><i class="fa fa-clone"></i></a> &nbsp;
+                                                <a href="/rei/tabla" class="product-title"><i class="fa fa-table"></i></a>
+                                            </td>
+                                            @else
+                                            <td></td>
+                                        @endif
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

@@ -1,0 +1,1 @@
+@lang('regimenes::regimenes.notificaciones_titulo', ['nombre' => $regimen->nombre])

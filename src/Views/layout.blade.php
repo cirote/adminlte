@@ -1,12 +1,5 @@
 @extends('layouts.project')
 
-@section('styles')
-	@parent
-	<script id="MathJax-script" async
-		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-	</script>
-@endsection
-
 @section('module_layout', 'layout-top-nav')
 
 @section('main_header')
