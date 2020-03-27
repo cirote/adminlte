@@ -11,9 +11,9 @@ class CreateItemsRegimenesTable extends Migration
     {
         Schema::create(Regimenes::PREFIJO . Regimenes::ITEMS, function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('lista_id')->unsigned()->index()->refers()->on(Regimenes::PREFIJO . Regimenes::LISTAS);
 	        $table->string('codigo');
             $table->float('arancel')->nullable();
-            $table->longText('observaciones')->nullable();
 	        $table->timestamps();
         });
     }

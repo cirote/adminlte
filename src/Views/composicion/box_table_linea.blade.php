@@ -18,14 +18,9 @@
 
         @if($e)
             <td style="text-align: center">
-                @if(0)
-                    <a href="/rei/items" class="product-title">
-                @endif    
+                <a href="{{ route('regimenes.composicion.items', ['lista' => $e]) }}" class="product-title">
                     @lang('regimenes::regimenes.notificaciones_nota', ['nota' => $e->notificacion->nota, 'fecha' => $e->notificacion->fecha->format('d/m/Y')])
-                @if(0)
-                    </a>
-                @endif
-                 &nbsp;
+                </a>&nbsp;
                 <a href="{{ route('regimenes.lista.nota', ['lista' => $e]) }}" class="product-title"><i class="fa fa-clone"></i></a> &nbsp;
                 <a href="{{ route('regimenes.lista.tabla', ['lista' => $e]) }}" class="product-title"><i class="fa fa-table"></i></a>
             </td>

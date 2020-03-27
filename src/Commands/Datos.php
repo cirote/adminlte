@@ -9,7 +9,9 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Mercosur\Regimenes\Config\Regimenes;
 use Mercosur\Regimenes\Models\Regimenes\Notificacion;
+use Mercosur\Regimenes\Models\Regimenes\Item;
 use Mercosur\Regimenes\Models\Regimenes\Lista;
+use Mercosur\Regimenes\Models\Regimenes\Observacion;
 use Mercosur\Regimenes\Models\Regimenes\Regimen;
 
 class Datos extends Command
@@ -48,6 +50,10 @@ class Datos extends Command
 
 		Lista::truncate();
 
+		Item::truncate();
+
+		Observacion::truncate();
+
 		DB::statement('SET foreign_key_checks=1');
 	}
 
@@ -83,10 +89,15 @@ class Datos extends Command
 
 		$notificacion = $this->crearNotificacion($datos_de_la_notificacion, $info);
 
-		foreach ($info->notificaciones as $datos_de_la_lista) {
+		foreach ($info->notificaciones as $datos_de_la_lista) 
+		{
 			$this->info('- Cargando lista de ' . $datos_de_la_lista->regimen);
 
 			$lista = $this->crearLista($notificacion, $datos_de_la_lista);
+
+			$importador = 'Mercosur\Regimenes\Commands\Importadores\\' . $datos_de_la_lista->importador;
+
+			$importador = new $importador($lista);
 		}
 	}
 

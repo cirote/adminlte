@@ -10,6 +10,7 @@ Route::middleware(['web'])->namespace('Mercosur\Regimenes\Controllers')
 		Route::get('/', 'RegimenesController@index')->name('index');
 
 		Route::get('/{regimen}/composicion', 'RegimenesController@composicion')->name('composicion');
+		Route::get('/{lista}/composicion/items', 'RegimenesController@composicion_items')->name('composicion.items');
 
 		Route::get('/lista/{lista}/nota', 'RegimenesController@lista_nota')->name('lista.nota');
 		Route::get('/lista/{lista}/tabla', 'RegimenesController@lista_tabla')->name('lista.tabla');

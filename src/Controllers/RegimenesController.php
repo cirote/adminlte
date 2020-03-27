@@ -21,6 +21,12 @@ class RegimenesController extends Controller
 			->withRegimen($regimen->load('listas.notificacion'));
 	}
 
+	public function composicion_items(Lista $lista)
+	{
+		return view('regimenes::composicion_items')
+			->withLista($lista->load('items.observaciones'));
+	}
+
 	public function lista_nota(Lista $lista)
 	{
 		return Storage::download($lista->notificacion->directorio . '/' . $lista->notificacion->descargar);
