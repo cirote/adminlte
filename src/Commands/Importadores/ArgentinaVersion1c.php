@@ -6,9 +6,14 @@ use Mercosur\Regimenes\Models\Regimenes\Item;
 
 class ArgentinaVersion1c extends ArgentinaVersion1b
 {
+	protected function boot(): void
+	{
+
+	}
+
 	protected function agregarObservaciones(Item $item, $celda): void
 	{
-		$observacion = trim($celda[static::CELDA_OBSERVACIONES]);
+		$observacion = trim($celda[$this->celdaObservaciones()]);
 
 		if (strlen($observacion)) 
 		{

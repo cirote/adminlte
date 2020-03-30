@@ -51,7 +51,7 @@ class Regimenes extends Command
         Regimen::create([
 	        'abreviatura' => 'LETEC',
 	        'nombre' => [
-			    'es' => 'Listas nacionales de excepciones al AEC',
+			    'es' => 'Excepciones al Arancel Externo Comun',
 			    'pt' => 'Listas nacionais de exceções à TEC'
 		    ]
         ]);
@@ -59,7 +59,7 @@ class Regimenes extends Command
 	    Regimen::create([
 		    'abreviatura' => 'BK',
 		    'nombre' => [
-			    'es' => 'Listas nacionales de bienes de capital',
+			    'es' => 'Bienes de capital',
 			    'pt' => 'Listas nacionais de bens de capital'
 		    ]
 		]);
@@ -67,7 +67,15 @@ class Regimenes extends Command
 	    Regimen::create([
 		    'abreviatura' => 'BIT',
 		    'nombre' => [
-			    'es' => 'Listas nacionales de bienes de informática y telecomunicaciones',
+			    'es' => 'Bienes de informática y telecomunicaciones',
+			    'pt' => 'Listas nacionais de produtos de informática e telecomunicações'
+		    ]
+	    ]);
+
+	    Regimen::create([
+		    'abreviatura' => 'IA',
+		    'nombre' => [
+			    'es' => 'Insumos agropecuarios',
 			    'pt' => 'Listas nacionais de produtos de informática e telecomunicações'
 		    ]
 	    ]);

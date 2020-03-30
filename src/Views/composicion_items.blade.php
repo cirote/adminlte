@@ -16,6 +16,8 @@
                         <th style="width: 10%; text-align: center">#</th>
                         <th style="width: 10%; text-align: center">Código</th>
                         <th style="width: 10%; text-align: center">Arancel Nacional</th>
+                        <th style="width: 10%; text-align: center">Desde</th>
+                        <th style="width: 10%; text-align: center">Hasta</th>
                         <th style="width: 70%; text-align: left">Observaciones</th>
                     </tr>
                     @foreach($lista->items as $item)
@@ -30,7 +32,19 @@
                                         <td style="text-align: center">{{ $orden }}</td>
                                         <td style="text-align: center">{{ $item->codigo }}</td>
                                         <td style="text-align: center">{{ $item->arancel }}</td>
+                                        @if($item->inclusion)
+                                            <td style="text-align: center">{{ $item->inclusion->format('d/m/Y') }}</td>
+                                        @else
+                                            <td></td>
+                                        @endif
+                                        @if($item->finalizacion)
+                                            <td style="text-align: center">{{ $item->finalizacion->format('d/m/Y') }}</td>
+                                        @else
+                                            <td></td>
+                                        @endif
                                     @else
+                                        <td></td>
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

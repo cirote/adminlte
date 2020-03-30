@@ -14,10 +14,13 @@ class CreateNotificacionesTable extends Migration
             $table->increments('id');
 	        $table->string('informante');
             $table->date('fecha');
-            $table->string('nota');
-            $table->json('asunto');
+            $table->string('nota')->nullable()->default(null);
+            $table->json('asunto')->nullable()->default(null);
+            $table->string('organo')->nullable()->default(null);
+            $table->string('reunion')->nullable()->default(null);
+            $table->string('link')->nullable()->default(null);
             $table->string('directorio');
-            $table->string('descargar');
+            $table->string('descargar')->nullable()->default(null);
 	        $table->timestamps();
         });
     }

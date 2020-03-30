@@ -15,8 +15,8 @@
                 <th style="width: 18%; text-align: center">Paraguay</th>
                 <th style="width: 18%; text-align: center">Uruguay</th>
             </tr>
-            @foreach($regimen->listas()->composicion()->periodosSemestrales()->get() as $periodo)
-                @include('regimenes::composicion.box_table_linea')
+            @foreach($regimen->listas()->utilizacion()->periodosTrimestrales()->get() as $periodo)
+                @include('regimenes::utilizacion.box_table_linea')
             @endforeach
             </tbody>
         </table>

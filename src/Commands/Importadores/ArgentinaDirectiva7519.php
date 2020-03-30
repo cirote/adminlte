@@ -2,18 +2,32 @@
 
 namespace Mercosur\Regimenes\Commands\Importadores;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Mercosur\Regimenes\Config\Regimenes;
-use Mercosur\Regimenes\Models\Regimenes\Notificacion;
-use Mercosur\Regimenes\Models\Regimenes\Lista;
-use Mercosur\Regimenes\Models\Regimenes\Regimen;
-use Mercosur\Helpers\Facades\Excell;
+use Mercosur\Regimenes\Models\Regimenes\Item;
 
-class ArgentinaDirectiva7519 extends ImportadorBase
+class ArgentinaDirectiva7519 extends ArgentinaVersion1c
 {
+	protected const CELDA_OBSERVACIONES = 'D';
+
+	protected function agregarObservaciones(Item $item, $celda): void
+	{
+		$observaciones = trim($celda[$this->celdaObservaciones()]);
+
+		if (strlen($observaciones)) 
+		{
+			$observaciones = explode(PHP_EOL, $observaciones);
+
+			foreach ($observaciones as $observacion) 
+			{
+				$observacion = trim($observacion);
+
+				if (strlen($observacion)) 
+				{
+					$item->observaciones()->create([
+						'observacion' => $observacion
+					]);
+				}
+			}
+		}
+	}
 
 }

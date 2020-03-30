@@ -15,9 +15,27 @@ use Mercosur\Helpers\Facades\Excell;
 
 abstract class ImportadorBase
 {
+	protected const CELDA_CODIGO = 'A';
+
+	protected const CELDA_ARANCEL = 'C';
+
+	protected const CELDA_ARANCEL_APLICADO = null;
+
+	protected const CELDA_OBSERVACIONES = 'B';
+
+	protected const CELDA_IMPORTACIONES_MERCOSUR = 'C';
+
+	protected const CELDA_IMPORTACIONES_EXTRAZONA = 'B';
+
+	protected const CELDA_EXPORTACIONES_MERCOSUR = null;
+
+	protected const CELDA_EXPORTACIONES_EXTRAZONA = null;
+
 	protected $lista;
 
 	protected $archivo;
+
+	protected $hoja;
 
 	protected $datos;
 
@@ -27,7 +45,9 @@ abstract class ImportadorBase
 
 		$this->archivo = $lista->notificacion->directorio . '/' . $lista->archivo;
 
-		$this->datos = Excell::toArray($this->archivo);
+		$this->hoja = $lista->hoja ?? null;
+
+		$this->datos = Excell::toArray($this->archivo, $this->hoja);
 
 		$this->boot();
 
@@ -58,32 +78,93 @@ abstract class ImportadorBase
 
 		$v = str_replace('.', '', $v);
 
-		if (strlen($v) != 8)
+		if (strlen($v) == 7)
 		{
-			// dump("Numero de caracteres incorrectos en [$valor]");
-
-			return null;
+			$v = '0' . $v;
 		}
 
-		return $v;
+		$patron = "/[0-9]{8}/i";
+
+		if (preg_match($patron, $v, $ocurrencias)) 
+		{
+			return $v;
+		}
+
+		return null;
 	}
 
-	protected function arancel($valor): float
+	protected function arancel($valor): ?float
 	{
 		$v = trim($valor);
 
 		if (!strlen($v))
 		{
 			dump("Arancel en blanco en [$valor]");
+
+			return null;
 		}
 
 		$v = (float) $v;
 
-		if ($v < 0 or $v > 50)
+		if ($v < 0 or $v > 60)
 		{
 			dump("Arancel fuera de rango en [$valor]");
 		}
 
 		return $v;
+	}
+
+	protected function monto($valor): float
+	{
+		$v = trim($valor);
+
+		$v = (float) $v;
+
+		if ($v < 0)
+		{
+			dump("Monto negativo [$valor]");
+		}
+
+		return $v;
+	}
+
+	protected function celdaCodigo()
+	{
+		return $this->lista->codigo ?? static::CELDA_CODIGO;
+	}
+
+	protected function celdaArancel()
+	{
+		return $this->lista->arancel ?? static::CELDA_ARANCEL;
+	}
+
+	protected function celdaArancelAplicado()
+	{
+		return $this->lista->arancel_aplicado ?? static::CELDA_ARANCEL_APLICADO;
+	}
+
+	protected function celdaObservaciones()
+	{
+		return $this->lista->observaciones ?? static::CELDA_OBSERVACIONES;
+	}
+
+	protected function celdaImportacionesMercosur()
+	{
+		return $this->lista->importaciones_mercosur ?? static::CELDA_IMPORTACIONES_MERCOSUR;
+	}
+
+	protected function celdaImportacionesExtrazona()
+	{
+		return $this->lista->importaciones_extrazona ?? static::CELDA_IMPORTACIONES_EXTRAZONA;
+	}
+
+	protected function celdaExportacionesMercosur()
+	{
+		return $this->lista->exportaciones_mercosur ?? static::CELDA_EXPORTACIONES_MERCOSUR;
+	}
+
+	protected function celdaExportacionesExtrazona()
+	{
+		return $this->lista->exportaciones_extrazona ?? static::CELDA_EXPORTACIONES_EXTRAZONA;
 	}
 }

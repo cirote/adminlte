@@ -11,7 +11,7 @@ class RegimenesController extends Controller
 {
 	public function index()
 	{
-		return view('regimenes::reo')
+		return view('regimenes::index')
 			->withRegimenes(Regimen::all());
 	}
 
@@ -24,6 +24,18 @@ class RegimenesController extends Controller
 	public function composicion_items(Lista $lista)
 	{
 		return view('regimenes::composicion_items')
+			->withLista($lista->load('items.observaciones'));
+	}
+
+	public function utilizacion(Regimen $regimen)
+	{
+		return view('regimenes::utilizacion')
+			->withRegimen($regimen->load('listas.notificacion'));
+	}
+
+	public function utilizacion_items(Lista $lista)
+	{
+		return view('regimenes::utilizacion_items')
 			->withLista($lista->load('items.observaciones'));
 	}
 

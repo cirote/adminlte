@@ -13,7 +13,13 @@ class CreateItemsRegimenesTable extends Migration
             $table->increments('id');
             $table->integer('lista_id')->unsigned()->index()->refers()->on(Regimenes::PREFIJO . Regimenes::LISTAS);
 	        $table->string('codigo');
-            $table->float('arancel')->nullable();
+            $table->float('arancel')->nullable()->default(null);
+            $table->double('importaciones_extrazona')->nullable()->default(null);
+            $table->double('importaciones_mercosur')->nullable()->default(null);
+            $table->double('exportaciones_extrazona')->nullable()->default(null);
+            $table->double('exportaciones_mercosur')->nullable()->default(null);
+            $table->date('inclusion')->nullable()->default(null);
+            $table->date('finalizacion')->nullable()->default(null);
 	        $table->timestamps();
         });
     }

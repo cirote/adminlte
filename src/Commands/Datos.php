@@ -103,16 +103,24 @@ class Datos extends Command
 
 	protected function crearNotificacion($datos_de_la_notificacion, \stdClass $info): Notificacion
 	{
+		if (isset($info->asunto))
+		{
+			$asunto = [
+            	'es' => $info->asunto->es,
+            	'pt' => $info->asunto->pt
+            ];
+		}
+
 		return Notificacion::create([
 			'informante' => explode('/', $datos_de_la_notificacion)[2], 
             'fecha' 	 => Carbon::rawCreateFromFormat("d/m/Y", $info->fecha), 
-            'nota' 	 	 => $info->nota,
-            'asunto' 	 => [
-            	'es' => $info->asunto->es,
-            	'pt' => $info->asunto->pt
-            ],
+            'nota' 	 	 => $info->nota ?? null,
+            'asunto' 	 => $asunto ?? null,
+            'organo'  	 => $info->organo ?? null,
+            'reunion'  	 => $info->reunion ?? null,
+            'link' 	 	 => $info->link ?? null,
             'directorio' => $datos_de_la_notificacion,
-            'descargar'  => $info->descargar
+            'descargar'  => $info->descargar ?? null
 		]);
 	}
 
@@ -125,7 +133,11 @@ class Datos extends Command
             'semestre'   => $datos_de_la_lista->semestre ?? null,
             'trimestre'  => $datos_de_la_lista->trimestre ?? null,
 	        'archivo'    => $datos_de_la_lista->archivo,
-	        'hoja'       => $datos_de_la_lista->hoja
+	        'hoja'       => $datos_de_la_lista->hoja ?? null,
+	        'importaciones_mercosur'	=> $datos_de_la_lista->importaciones_mercosur ?? null,
+	        'importaciones_extrazona'   => $datos_de_la_lista->importaciones_extrazona ?? null,
+	        'exportaciones_mercosur'	=> $datos_de_la_lista->exportaciones_mercosur ?? null,
+	        'exportaciones_extrazona'   => $datos_de_la_lista->exportaciones_extrazona ?? null
 		]);
 	}
 }

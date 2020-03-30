@@ -33,9 +33,19 @@ class Lista extends Model
 		return $query->where('tipo', 'composicion');
 	}
 
-	public function scopePeriodos($query)
+	public function scopeUtilizacion($query)
+	{
+		return $query->where('tipo', 'utilizacion');
+	}
+
+	public function scopePeriodosSemestrales($query)
 	{
 		return $query->select('anio', 'semestre')->orderByDesc('anio', 'semestre')->distinct();
+	}
+
+	public function scopePeriodosTrimestrales($query)
+	{
+		return $query->select('anio', 'trimestre')->orderByDesc('anio', 'trimestre')->distinct();
 	}
 }
 

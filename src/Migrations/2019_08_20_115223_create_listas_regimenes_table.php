@@ -18,7 +18,11 @@ class CreateListasRegimenesTable extends Migration
             $table->integer('semestre')->nullable()->default(null);
             $table->integer('trimestre')->nullable()->default(null);
 	        $table->string('archivo');
-            $table->string('hoja');
+            $table->string('importaciones_mercosur')->nullable()->default(null);
+            $table->string('importaciones_extrazona')->nullable()->default(null);
+            $table->string('exportaciones_mercosur')->nullable()->default(null);
+            $table->string('exportaciones_extrazona')->nullable()->default(null);
+            $table->string('hoja')->nullable();
 	        $table->timestamps();
         });
     }

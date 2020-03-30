@@ -57,11 +57,11 @@ class ArgentinaVersion1a extends ImportadorBase
 
 	protected function cargarCodigo($celda): void
 	{
-		$codigo = $this->codigo($celda[static::CELDA_CODIGO]);
+		$codigo = $this->codigo($celda[$this->celdaCodigo()]);
 
 		if ($codigo) 
 		{
-			$arancel = $this->arancel($celda[static::CELDA_ARANCEL]);
+			$arancel = $this->arancel($celda[$this->celdaArancel()]);
 
 			$item = $this->lista->items()->create([
 				'codigo'  => $codigo,
@@ -76,7 +76,7 @@ class ArgentinaVersion1a extends ImportadorBase
 	{
 		$patron = "/\([0-9]{1,2}\)/i";
 
-		foreach (explode(' ', $celda[static::CELDA_OBSERVACIONES]) as $obs) 
+		foreach (explode(' ', $celda[$this->celdaObservaciones()]) as $obs) 
 		{
 			if (preg_match($patron, $obs, $ocurrencias)) 
 			{

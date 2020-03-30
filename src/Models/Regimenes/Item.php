@@ -9,7 +9,7 @@ class Item extends Model
 {
 	protected $table = Regimenes::PREFIJO . Regimenes::ITEMS;
 
-	protected $fillable = ['codigo', 'arancel', 'observaciones'];
+	protected $guarded = [];
 
 	public function observaciones()
 	{

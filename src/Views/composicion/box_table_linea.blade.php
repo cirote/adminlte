@@ -3,7 +3,7 @@
         @lang('regimenes::regimenes.notificaciones_semestre', ['semestre' => $periodo->semestre, 'ano' => $periodo->anio])
     </td>
 
-    @foreach(['ARG', 'BRA', 'PRY', 'URY', 'VNZ'] as $informante)
+    @foreach(['ARG', 'BRA', 'PRY', 'URY'] as $informante)
 
         @php(
             $e = $regimen->listas->filter

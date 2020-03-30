@@ -11,19 +11,16 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<h3>@lang('regimenes::regimenes.origen')</h3>
+				<h3>@lang('regimenes::regimenes.composicion')</h3>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 1</a>
+			@foreach($regimenes as $regimen)
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<a href="{{ route('regimenes.composicion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
+				<br>
 			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 2</a>
-			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 3</a>
-			</div>
+			@endforeach
 		</div>
 
 		<div class="row">
@@ -33,19 +30,16 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<h3>@lang('regimenes::regimenes.rei')</h3>
+				<h3>@lang('regimenes::regimenes.utilizacion')</h3>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 1</a>
+			@foreach($regimenes as $regimen)
+			<div class="col-sm-12 col-md-6 col-lg-6">
+				<a href="{{ route('regimenes.utilizacion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
+				<br>
 			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 2</a>
-			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<a href="{{ route('regimenes.index') }}" class="btn btn-block bg-olive btn-lg">Alternativa 3</a>
-			</div>
+			@endforeach
 		</div>
 
 	</div>
