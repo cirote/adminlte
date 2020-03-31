@@ -23,6 +23,13 @@ Cargar los datos sobre los regimenes especiales disponibles
 ``` bash
 $ php artisan populate:regimenes
 ```
+
+Cargar las notificaciones de los Estados Parte
+
+``` bash
+$ php artisan populate:notificaciones
+```
+
 ## Credits
 
 - [Esteban Rogel][link-author]
