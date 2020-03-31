@@ -16,10 +16,12 @@
 		</div>
 		<div class="row">
 			@foreach($regimenes as $regimen)
-			<div class="col-sm-12 col-md-6 col-lg-6">
-				<a href="{{ route('regimenes.composicion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
-				<br>
-			</div>
+				@if($regimen->composicion)
+					<div class="col-sm-12 col-md-6 col-lg-6">
+						<a href="{{ route('regimenes.composicion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
+						<br>
+					</div>
+				@endif
 			@endforeach
 		</div>
 
@@ -35,10 +37,12 @@
 		</div>
 		<div class="row">
 			@foreach($regimenes as $regimen)
-			<div class="col-sm-12 col-md-6 col-lg-6">
-				<a href="{{ route('regimenes.utilizacion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
-				<br>
-			</div>
+				@if($regimen->utilizacion)
+					<div class="col-sm-12 col-md-6 col-lg-6">
+						<a href="{{ route('regimenes.utilizacion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
+						<br>
+					</div>
+				@endif
 			@endforeach
 		</div>
 

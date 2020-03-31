@@ -9,13 +9,12 @@
         <table class="table table-condensed">
             <tbody>
             <tr>
-                <th style="width: 10%; text-align: center">Periodo Notificado</th>
-                <th style="width: 18%; text-align: center">Argentina</th>
-                <th style="width: 18%; text-align: center">Brasil</th>
-                <th style="width: 18%; text-align: center">Paraguay</th>
-                <th style="width: 18%; text-align: center">Uruguay</th>
+                <th style="width: 10%; text-align: center">@lang("regimenes::regimenes.periodo_notificado")</th>
+                @foreach($regimen->paises as $informante)
+                    <th style="width: 18%; text-align: center">@lang("regimenes::regimenes.$informante")</th>
+                @endforeach
             </tr>
-            @foreach($regimen->listas()->composicion()->periodosSemestrales()->get() as $periodo)
+            @foreach($regimen->listas()->composicion()->periodos($regimen->composicion)->get() as $periodo)
                 @include('regimenes::composicion.box_table_linea')
             @endforeach
             </tbody>

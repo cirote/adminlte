@@ -1,16 +1,24 @@
 <tr>
     <td style="text-align: center">
-        @lang('regimenes::regimenes.notificaciones_semestre', ['semestre' => $periodo->semestre, 'ano' => $periodo->anio])
+        @lang('regimenes::regimenes.notificaciones_periodo', [
+            'numero'  => $periodo->periodo,
+            'periodo' => __("regimenes::regimenes.{$regimen->composicion}"),
+            'ano'     => $periodo->anio
+        ])
     </td>
 
-    @foreach(['ARG', 'BRA', 'PRY', 'URY'] as $informante)
+    @foreach($regimen->paises as $informante)
 
         @php(
             $e = $regimen->listas->filter
             (
-                function ($lista) use ($periodo, $informante)
+                function ($lista) use ($periodo, $informante, $regimen)
                 {  
-                    return $lista->notificacion->informante == $informante && $lista->anio == $periodo->anio && $lista->semestre == $periodo->semestre; 
+                    $propiedad = $regimen->composicion;
+
+                    return $lista->notificacion->informante == $informante 
+                        && $lista->anio == $periodo->anio 
+                        && $lista->$propiedad == $periodo->periodo; 
                 }
             )
             ->first()
@@ -19,12 +27,11 @@
         @if($e)
             <td style="text-align: center">
                 <a href="{{ route('regimenes.composicion.items', ['lista' => $e]) }}" class="product-title">
-                    @lang('regimenes::regimenes.notificaciones_nota', ['nota' => $e->notificacion->nota, 'fecha' => $e->notificacion->fecha->format('d/m/Y')])
+                    @include('regimenes::composicion.titulo_notificacion')
                 </a>&nbsp;
-                <a href="{{ route('regimenes.lista.nota', ['lista' => $e]) }}" class="product-title"><i class="fa fa-clone"></i></a> &nbsp;
-                <a href="{{ route('regimenes.lista.tabla', ['lista' => $e]) }}" class="product-title"><i class="fa fa-table"></i></a>
+                @include('regimenes::composicion.titulo_nota')
             </td>
-            @else
+        @else
             <td></td>
         @endif
 

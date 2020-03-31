@@ -4,8 +4,34 @@
     <div class="box">
         <div class="box-header">
             <h3 class="box-title">
-                {{ $lista->notificacion->informante }}: {{ $lista->regimen->nombre }} segun 
-                @lang('regimenes::regimenes.notificaciones_nota', ['nota' => $lista->notificacion->nota, 'fecha' => $lista->notificacion->fecha->format('d/m/Y')])
+
+                @php($nombrePeriodo = $lista->regimen->composicion)
+
+                @if($lista->notificacion->nota)
+                    @lang('regimenes::regimenes.notificaciones_titulo_nota', [
+                        'pais' => __("regimenes::regimenes.{$lista->notificacion->informante}"),
+                        'nombre' => $lista->regimen->nombre,
+                        'nota' => $lista->notificacion->nota, 
+                        'fecha' => $lista->notificacion->fecha->format('d/m/Y'),
+                        'numero'  => $lista->$nombrePeriodo,
+                        'periodo' => __("regimenes::regimenes.{$lista->regimen->composicion}"),
+                        'ano'     => $lista->anio
+                    ])
+                @endif
+
+                @if($lista->notificacion->organo)
+                    @lang('regimenes::regimenes.notificaciones_titulo_organo', [
+                        'pais' => __("regimenes::regimenes.{$lista->notificacion->informante}"),
+                        'nombre' => $lista->regimen->nombre,
+                        'organo' => $lista->notificacion->organo, 
+                        'reunion' => $lista->notificacion->reunion,
+                        'fecha' => $lista->notificacion->fecha->format('d/m/Y'),
+                        'numero'  => $lista->$nombrePeriodo,
+                        'periodo' => __("regimenes::regimenes.{$lista->regimen->composicion}"),
+                        'ano'     => $lista->anio
+                    ])
+                @endif
+
             </h3>
         </div>
 
@@ -14,11 +40,11 @@
                 <tbody>
                     <tr>
                         <th style="width: 10%; text-align: center">#</th>
-                        <th style="width: 10%; text-align: center">Código</th>
-                        <th style="width: 10%; text-align: center">Arancel Nacional</th>
-                        <th style="width: 10%; text-align: center">Desde</th>
-                        <th style="width: 10%; text-align: center">Hasta</th>
-                        <th style="width: 70%; text-align: left">Observaciones</th>
+                        <th style="width: 10%; text-align: center">@lang('regimenes::regimenes.codigo')</th>
+                        <th style="width: 10%; text-align: center">@lang('regimenes::regimenes.arancel_nacional')</th>
+                        <th style="width: 10%; text-align: center">@lang('regimenes::regimenes.desde')</th>
+                        <th style="width: 10%; text-align: center">@lang('regimenes::regimenes.hasta')</th>
+                        <th style="width: 70%; text-align: left">@lang('regimenes::regimenes.observaciones')</th>
                     </tr>
                     @foreach($lista->items as $item)
 
@@ -30,7 +56,7 @@
                                 <tr>
                                     @if($loop->first)
                                         <td style="text-align: center">{{ $orden }}</td>
-                                        <td style="text-align: center">{{ $item->codigo }}</td>
+                                        <td style="text-align: center">{{ $item->codigoFormateado }}</td>
                                         <td style="text-align: center">{{ $item->arancel }}</td>
                                         @if($item->inclusion)
                                             <td style="text-align: center">{{ $item->inclusion->format('d/m/Y') }}</td>
@@ -57,6 +83,16 @@
                                 <td style="text-align: center">{{ $orden }}</td>
                                 <td style="text-align: center">{{ $item->codigo }}</td>
                                 <td style="text-align: center">{{ $item->arancel }}</td>
+                                @if($item->inclusion)
+                                    <td style="text-align: center">{{ $item->inclusion->format('d/m/Y') }}</td>
+                                @else
+                                    <td></td>
+                                @endif
+                                @if($item->finalizacion)
+                                    <td style="text-align: center">{{ $item->finalizacion->format('d/m/Y') }}</td>
+                                @else
+                                    <td></td>
+                                @endif
                                 <td></td>
                             </tr>
                         @endif

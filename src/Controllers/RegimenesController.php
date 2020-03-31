@@ -46,6 +46,9 @@ class RegimenesController extends Controller
 
 	public function lista_tabla(Lista $lista)
 	{
+		if ($lista->descargar)
+			return Storage::download($lista->notificacion->directorio . '/' . $lista->descargar);
+
 		return Storage::download($lista->notificacion->directorio . '/' . $lista->archivo);
 	}
 }

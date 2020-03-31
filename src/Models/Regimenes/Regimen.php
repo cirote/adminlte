@@ -12,10 +12,16 @@ class Regimen extends Model
 
 	protected $table = Regimenes::PREFIJO . Regimenes::REGIMENES;
 
-	protected $translatable = ['nombre'];
+    public $incrementing = false;
+
+    protected $translatable = ['nombre'];
 
 	protected $guarded = [];
 	
+	protected $casts = [
+    	'paises' => 'array',
+	];
+
 	public static function byAbreviatura($abreviatura)
 	{
 		return static::where('abreviatura', $abreviatura)->first();

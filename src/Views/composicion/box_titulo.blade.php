@@ -1,1 +1,1 @@
-@lang('regimenes::regimenes.notificaciones_titulo', ['nombre' => $regimen->nombre])
+@lang('regimenes::regimenes.notificaciones_composicion', ['nombre' => $regimen->nombre])

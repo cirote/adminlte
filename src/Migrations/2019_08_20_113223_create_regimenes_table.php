@@ -9,10 +9,14 @@ class CreateRegimenesTable extends Migration
 {
     public function up()
     {
-        Schema::create(Regimenes::PREFIJO . Regimenes::REGIMENES, function (Blueprint $table) {
-            $table->increments('id');
-	        $table->string('abreviatura');
+        Schema::create(Regimenes::PREFIJO . Regimenes::REGIMENES, function (Blueprint $table) 
+        {
+            //  $table->increments('id');
+	        $table->string('id');
             $table->string('nombre');
+            $table->json('paises');
+            $table->string('composicion')->nullable();
+            $table->string('utilizacion')->nullable();
 	        $table->timestamps();
         });
     }

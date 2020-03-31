@@ -61,11 +61,9 @@ class ArgentinaVersion1a extends ImportadorBase
 
 		if ($codigo) 
 		{
-			$arancel = $this->arancel($celda[$this->celdaArancel()]);
-
 			$item = $this->lista->items()->create([
 				'codigo'  => $codigo,
-				'arancel' => $arancel
+				'arancel' => $this->celdaArancel() ? $this->arancel($celda[$this->celdaArancel()]) : null
 			]);
 
 			$this->agregarObservaciones($item, $celda);

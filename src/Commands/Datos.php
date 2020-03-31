@@ -127,12 +127,13 @@ class Datos extends Command
 	protected function crearLista(Notificacion $notificacion, $datos_de_la_lista): Lista
 	{
 		return $notificacion->listas()->create([
-			'regimen_id' => Regimen::byAbreviatura($datos_de_la_lista->regimen)->id,
+			'regimen_id' => Regimen::find($datos_de_la_lista->regimen)->id,
             'tipo' 		 => $datos_de_la_lista->tipo,
             'anio' 		 => $datos_de_la_lista->ano,
             'semestre'   => $datos_de_la_lista->semestre ?? null,
             'trimestre'  => $datos_de_la_lista->trimestre ?? null,
 	        'archivo'    => $datos_de_la_lista->archivo,
+	        'descargar'  => $datos_de_la_lista->descargar ?? null,
 	        'hoja'       => $datos_de_la_lista->hoja ?? null,
 	        'importaciones_mercosur'	=> $datos_de_la_lista->importaciones_mercosur ?? null,
 	        'importaciones_extrazona'   => $datos_de_la_lista->importaciones_extrazona ?? null,

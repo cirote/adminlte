@@ -1,16 +1,24 @@
 <tr>
     <td style="text-align: center">
-        @lang('regimenes::regimenes.notificaciones_trimestre', ['trimestre' => $periodo->trimestre, 'ano' => $periodo->anio])
+        @lang('regimenes::regimenes.notificaciones_periodo', [
+            'numero'  => $periodo->periodo,
+            'periodo' => __("regimenes::regimenes.{$regimen->utilizacion}"),
+            'ano'     => $periodo->anio
+        ])
     </td>
 
-    @foreach(['ARG', 'BRA', 'PRY', 'URY'] as $informante)
+    @foreach($regimen->paises as $informante)
 
         @php(
             $e = $regimen->listas->filter
             (
-                function ($lista) use ($periodo, $informante)
+                function ($lista) use ($periodo, $informante, $regimen)
                 {  
-                    return $lista->notificacion->informante == $informante && $lista->anio == $periodo->anio && $lista->trimestre == $periodo->trimestre; 
+                    $propiedad = $regimen->utilizacion;
+
+                    return $lista->notificacion->informante == $informante 
+                        && $lista->anio == $periodo->anio 
+                        && $lista->$propiedad == $periodo->periodo; 
                 }
             )
             ->first()
@@ -19,20 +27,9 @@
         @if($e)
             <td style="text-align: center">
                 <a href="{{ route('regimenes.utilizacion.items', ['lista' => $e]) }}" class="product-title">
-                    @if($e->notificacion->nota)
-                        @lang('regimenes::regimenes.notificaciones_nota', ['nota' => $e->notificacion->nota, 'fecha' => $e->notificacion->fecha->format('d/m/Y')])
-                    @endif
-                    @if($e->notificacion->organo)
-                        @lang('regimenes::regimenes.notificaciones_organo', ['organo' => $e->notificacion->organo, 'reunion' => $e->notificacion->reunion, 'fecha' => $e->notificacion->fecha->format('d/m/Y')])
-                    @endif
+                    @include('regimenes::composicion.titulo_notificacion')
                 </a>&nbsp;
-                @if($e->notificacion->nota)
-                    <a href="{{ route('regimenes.lista.nota', ['lista' => $e]) }}" class="product-title"><i class="fa fa-clone"></i></a> &nbsp;
-                @endif
-                @if($e->notificacion->organo)
-                    <a href="{{ $e->notificacion->link }}" class="product-title"><i class="fa fa-link"></i></a> &nbsp;
-                @endif
-                <a href="{{ route('regimenes.lista.tabla', ['lista' => $e]) }}" class="product-title"><i class="fa fa-table"></i></a>
+                @include('regimenes::composicion.titulo_nota')
             </td>
             @else
             <td></td>

@@ -6,7 +6,12 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Mercosur\Regimenes\Models\Regimenes\Notificacion;
+use Mercosur\Regimenes\Models\Regimenes\Item;
+use Mercosur\Regimenes\Models\Regimenes\Lista;
+use Mercosur\Regimenes\Models\Regimenes\Observacion;
 use Mercosur\Regimenes\Models\Regimenes\Regimen;
+
 
 class Regimenes extends Command
 {
@@ -37,11 +42,19 @@ class Regimenes extends Command
 
 	public function limpiar(): void
 	{
-		$this->info('Limpiando la tabla anterior');
+		$this->info('Limpiando las tablas de la base de datos');
 
 		DB::statement('SET foreign_key_checks=0');
 
 		Regimen::truncate();
+
+		Notificacion::truncate();
+
+		Lista::truncate();
+
+		Item::truncate();
+
+		Observacion::truncate();
 
 		DB::statement('SET foreign_key_checks=1');
 	}
@@ -49,35 +62,69 @@ class Regimenes extends Command
 	public function agregarDatos(): void
 	{
         Regimen::create([
-	        'abreviatura' => 'LETEC',
+	        'id' 	 => 'LETEC',
 	        'nombre' => [
-			    'es' => 'Excepciones al Arancel Externo Comun',
-			    'pt' => 'Listas nacionais de exceções à TEC'
-		    ]
+			    'es' => 'Excepciones al Arancel Externo Común',
+			    'pt' => 'Exceções à Tarifa Externa Comun'
+		    ],
+		    'paises' => ['ARG', 'BRA', 'PRY', 'URY'],
+		    'composicion' => 'semestre',
+		    'utilizacion' => 'trimestre'
         ]);
 
 	    Regimen::create([
-		    'abreviatura' => 'BK',
+		    'id'  	 => 'BK',
 		    'nombre' => [
 			    'es' => 'Bienes de capital',
-			    'pt' => 'Listas nacionais de bens de capital'
-		    ]
+			    'pt' => 'Bens de capital'
+		    ],
+		    'paises' => ['ARG', 'BRA', 'PRY', 'URY'],
+		    'composicion' => 'semestre',
+		    'utilizacion' => 'trimestre'
 		]);
 
 	    Regimen::create([
-		    'abreviatura' => 'BIT',
+		    'id' 	 => 'BIT',
 		    'nombre' => [
 			    'es' => 'Bienes de informática y telecomunicaciones',
-			    'pt' => 'Listas nacionais de produtos de informática e telecomunicações'
-		    ]
+			    'pt' => 'Bens de informática e telecomunicações'
+		    ],
+		    'paises' => ['ARG', 'BRA', 'PRY', 'URY'],
+		    'composicion' => 'semestre',
+		    'utilizacion' => 'trimestre'
 	    ]);
 
 	    Regimen::create([
-		    'abreviatura' => 'IA',
+		    'id'	 => 'IA',
 		    'nombre' => [
 			    'es' => 'Insumos agropecuarios',
-			    'pt' => 'Listas nacionais de produtos de informática e telecomunicações'
-		    ]
+			    'pt' => 'Insumos agropecuarios'
+		    ],
+		    'paises' => ['PRY', 'URY'],
+		    'composicion' => null,
+		    'utilizacion' => 'semestre'
+	    ]);
+
+	    Regimen::create([
+		    'id'	 => 'MP',
+		    'nombre' => [
+			    'es' => 'Materias primas',
+			    'pt' => 'Matérias primas'
+		    ],
+		    'paises' => ['PRY'],
+		    'composicion' => 'semestre',
+		    'utilizacion' => 'semestre'
+	    ]);
+
+	    Regimen::create([
+		    'id'	 => 'IEL',
+		    'nombre' => [
+			    'es' => 'REI de Impacto económico limitado',
+			    'pt' => 'REI de Impacto Econômico Limitado'
+		    ],
+		    'paises' => ['ARG', 'BRA', 'PRY', 'URY'],
+		    'composicion' => null,
+		    'utilizacion' => 'anual'
 	    ]);
 	}
 

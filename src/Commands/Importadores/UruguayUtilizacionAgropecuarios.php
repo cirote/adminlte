@@ -4,6 +4,10 @@ namespace Mercosur\Regimenes\Commands\Importadores;
 
 class UruguayUtilizacionAgropecuarios extends UruguayUtilizacion
 {
+	protected const CELDA_IMPORTACIONES_MERCOSUR = 'D';
+
+	protected const CELDA_IMPORTACIONES_EXTRAZONA = 'C';
+
 	protected function cargarCodigo($celda): void
 	{
 		if ($codigo = $this->codigo($celda[$this->celdaCodigo()])) 

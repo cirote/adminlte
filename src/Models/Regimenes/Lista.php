@@ -38,14 +38,19 @@ class Lista extends Model
 		return $query->where('tipo', 'utilizacion');
 	}
 
-	public function scopePeriodosSemestrales($query)
+	public function scopePeriodos($query, $periodo)
 	{
-		return $query->select('anio', 'semestre')->orderByDesc('anio', 'semestre')->distinct();
-	}
+		if ($periodo == 'trimestre')
+		{
+			return $query->select('anio', 'trimestre as periodo')->orderByDesc('anio', 'trimestre')->distinct();
+		}
 
-	public function scopePeriodosTrimestrales($query)
-	{
-		return $query->select('anio', 'trimestre')->orderByDesc('anio', 'trimestre')->distinct();
+		if ($periodo == 'semestre')
+		{
+			return $query->select('anio', 'semestre as periodo')->orderByDesc('anio', 'semestre')->distinct();
+		}
+
+		return $query->select('anio')->orderByDesc('anio')->distinct();
 	}
 }
 
