@@ -16,7 +16,7 @@ use Mercosur\Regimenes\Models\Regimenes\Regimen;
 
 class Datos extends Command
 {
-	protected $signature = 'populate:datos';
+	protected $signature = 'populate:notificaciones';
 
 	protected $description = 'Construye la base de datos de notificaciones de Regimenes Especiales de importaciones';
 
