@@ -30,6 +30,14 @@ Cargar las notificaciones de los Estados Parte
 $ php artisan populate:notificaciones
 ```
 
+### Utilizacion
+
+Via web
+
+``` bash
+https://polcom.mercosur.int/regimenes
+```
+
 ## Credits
 
 - [Esteban Rogel][link-author]
