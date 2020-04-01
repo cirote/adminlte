@@ -42,4 +42,4 @@ return [
 
 	'periodo_notificado' => 'Periodo Notificado'
 ];
-
+ 
