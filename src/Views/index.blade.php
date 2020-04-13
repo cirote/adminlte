@@ -1,53 +1,50 @@
-@extends('regimenes::layout')
+@extends('crud::layout')
 
-@section('content_header_title', __('regimenes::regimenes.reis'))
-@section('content_header_description', '')
+@section('title', 'Usuarios')
 
-@section('main-content')
-<div class="row">
+@section('content')
+    <div class="d-flex justify-content-between align-items-end mb-3">
+        <h1 class="pb-1">{{ $title }}</h1>
+        <p>
+            <a href="{{ route('crud.create') }}" class="btn btn-primary">Nuevo usuario e</a>
+        </p>
+    </div>
 
-	<div class="col-sm-1"></div>
-	<div class="col-sm-10">
+    @if ($users->isNotEmpty())
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($users as $user)
+        <tr>
+            <th scope="row">{{ $user->id }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->email }}</td>
+            <td>
+                <form action="{{ route('crud.destroy', $user) }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+                    <a href="{{ route('crud.show', $user) }}" class="btn btn-link"><span class="oi oi-eye"></span></a>
+                    <a href="{{ route('crud.edit', $user) }}" class="btn btn-link"><span class="oi oi-pencil"></span></a>
+                    <button type="submit" class="btn btn-link"><span class="oi oi-trash"></span></button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p>No hay usuarios registrados.</p>
+    @endif
+@endsection
 
-		<div class="row">
-			<div class="col-sm-12">
-				<h3>@lang('regimenes::regimenes.composicion')</h3>
-			</div>
-		</div>
-		<div class="row">
-			@foreach($regimenes as $regimen)
-				@if($regimen->composicion)
-					<div class="col-sm-12 col-md-6 col-lg-6">
-						<a href="{{ route('regimenes.composicion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
-						<br>
-					</div>
-				@endif
-			@endforeach
-		</div>
-
-		<div class="row">
-			<br>
-			<br>
-		</div>
-
-		<div class="row">
-			<div class="col-sm-12">
-				<h3>@lang('regimenes::regimenes.utilizacion')</h3>
-			</div>
-		</div>
-		<div class="row">
-			@foreach($regimenes as $regimen)
-				@if($regimen->utilizacion)
-					<div class="col-sm-12 col-md-6 col-lg-6">
-						<a href="{{ route('regimenes.utilizacion', ['regimen' => $regimen]) }}" class="btn btn-block bg-olive btn-lg">{{ $regimen->nombre }}</a>
-						<br>
-					</div>
-				@endif
-			@endforeach
-		</div>
-
-	</div>
-
-</div>
+@section('sidebar')
+    @parent
 @endsection
 

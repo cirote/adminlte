@@ -1,20 +1,3 @@
 <?php
 
-//Route::middleware(['web', 'auth'])->namespace('Mercosur\Regimenes\Controllers')->group(function()
-
-Route::middleware(['web'])->namespace('Mercosur\Regimenes\Controllers')
-	->prefix('regimenes')
-	->name('regimenes.')
-	->group(function() 
-	{
-		Route::get('/', 'RegimenesController@index')->name('index');
-
-		Route::get('/{regimen}/composicion', 'RegimenesController@composicion')->name('composicion');
-		Route::get('/{lista}/composicion/items', 'RegimenesController@composicion_items')->name('composicion.items');
-
-		Route::get('/{regimen}/utilizacion', 'RegimenesController@utilizacion')->name('utilizacion');
-		Route::get('/{lista}/utilizacion/items', 'RegimenesController@utilizacion_items')->name('utilizacion.items');
-
-		Route::get('/lista/{lista}/nota', 'RegimenesController@lista_nota')->name('lista.nota');
-		Route::get('/lista/{lista}/tabla', 'RegimenesController@lista_tabla')->name('lista.tabla');
-	});
+Route::middleware(['web'])->resource('crud', 'Cirote\Crud\Controllers\CrudController');

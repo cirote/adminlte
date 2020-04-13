@@ -1,32 +1,32 @@
 {
-    "name": "mercosur/regimenes",
-    "description": "Estadisticas sobre Regimenes especiales de importación",
+    "name": "cirote/crud",
+    "description": "Modelo de CRUD",
     "type": "library",
-    "license": "Only for use in the Mercosur Secreatariat",
+    "license": "",
     "authors": [
         {
             "name": "Esteban Rogel",
-            "email": "erogel@mercosur.int"
+            "email": "estebanrogel@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Mercosur\\Regimenes\\": "src/"
+            "Cirote\\Crud\\": "src/"
         }
     },
     "require": {
 
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.3"
+
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mercosur\\Regimenes\\ServiceProvider\\RegimenesServiceProvider"
+                "Cirote\\Crud\\ServiceProvider\\CrudServiceProvider"
             ],
             "aliases": {
-                "Ordenado": "Mercosur\\Regimenes\\Facades\\Regimenes"
+
             }
         }
     }

@@ -1,1 +1,0 @@
-@lang('regimenes::regimenes.notificaciones_utilizacion', ['nombre' => $regimen->nombre])
